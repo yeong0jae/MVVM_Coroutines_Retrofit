@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MealsCategoriesScreen() {
     val viewModel: MealsCategoriesViewModel = viewModel()
+    val meals = viewModel.getMeals()
     // composable이 살아있는 동안에는 다시 인스턴스화 되지 않음. 구성 변경(recomposition)이 발생하더라도 동일한 인스턴스가 유지
     Text(
         text = "Hello Compose!",
