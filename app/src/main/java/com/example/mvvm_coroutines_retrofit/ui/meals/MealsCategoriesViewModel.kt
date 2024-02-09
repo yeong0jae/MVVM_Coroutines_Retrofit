@@ -10,10 +10,7 @@ import com.example.model.response.MealsResponse
  * Model에 대한 참조 보유
  */
 class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository()) : ViewModel() {
-    fun getMeals(successCallback: (response: MealsCategoriesResponse?) -> Unit){
-        // 한번 더 콜백
-        repository.getMeals {response ->
-            successCallback(response)
-        }
+    suspend fun getMeals(): List<MealsResponse> {
+        return repository.getMeals().categories
     }
 }
