@@ -12,22 +12,19 @@ import retrofit2.Response
  */
 class MealsRepository(private val webService: MealsWebService = MealsWebService()) {
     fun getMeals(successCallback: (response: MealsCategoriesResponse?) -> Unit) {
-        return webService.getMeals().enqueue(object : Callback<MealsCategoriesResponse>{
-            // 성공했을 때, 실패했을 때 처리
-            override fun onResponse(
+        webService.getMeals().enqueue(object : Callback<MealsCategoriesResponse>{
+            override fun onResponse( // HTTP response 성공 시 호출
                 call: Call<MealsCategoriesResponse>,
                 response: Response<MealsCategoriesResponse>
             ) {
-                if (response.isSuccessful)
-                    successCallback(response.body())
+                if (response.isSuccessful) // 애플리케이션 수준에서의 성공 여부 확인
+                    successCallback(response.body()) // view로부터 전달받은 콜백함수 호출
             }
 
             override fun onFailure(call: Call<MealsCategoriesResponse>, t: Throwable) {
                 // TODO: 에러 처리
             }
         })
-
-
 
 //        return webService.getMeals().execute().body()
 //        execute()는 동기적으로 실행됨 block the Thread -> main thread에서 실행됨. 응답을 받을 때까지 앱을 block.

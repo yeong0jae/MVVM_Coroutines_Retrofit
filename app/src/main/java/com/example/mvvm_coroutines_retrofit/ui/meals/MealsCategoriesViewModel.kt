@@ -11,6 +11,7 @@ import com.example.model.response.MealsResponse
  */
 class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository()) : ViewModel() {
     fun getMeals(successCallback: (response: MealsCategoriesResponse?) -> Unit){
+        // 한번 더 콜백
         repository.getMeals {response ->
             successCallback(response)
         }
