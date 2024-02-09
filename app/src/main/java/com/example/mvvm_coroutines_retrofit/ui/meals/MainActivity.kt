@@ -37,21 +37,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MealsCategoriesScreen() {
     val viewModel: MealsCategoriesViewModel = viewModel()
-    val rememberedMeals: MutableState<List<MealsResponse>> = remember { mutableStateOf(emptyList<MealsResponse>()) }
-
-    // LaunchedEffect: composable이 처음으로 그려질 때 한 번 실행 -> 코루틴이 한번만 실행됨
-    LaunchedEffect(key1 = "GET_MEALS"){
-        rememberCoroutineScope().launch(Dispatchers.IO) { // IO 스레드에서 비동기적으로 실행
-            val meals = viewModel.getMeals()
-            rememberedMeals.value = meals
-        }
-    }
+    val meals = viewModel.mealsState.value
 
     LazyColumn() {
-        items(rememberedMeals.value.size) { index ->
-            Text(
-                text = rememberedMeals.value[index].name
-            )
+        items(meals.size) { index ->
+            Text(text = meals[index].name)
         }
     }
 }
