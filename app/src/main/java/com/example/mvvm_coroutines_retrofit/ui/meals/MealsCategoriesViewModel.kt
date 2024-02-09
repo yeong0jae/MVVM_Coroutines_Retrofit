@@ -2,6 +2,7 @@ package com.example.mvvm_coroutines_retrofit.ui.meals
 
 import androidx.lifecycle.ViewModel
 import com.example.model.MealsRepository
+import com.example.model.response.MealsCategoriesResponse
 import com.example.model.response.MealsResponse
 
 /** ViewModel Layer
@@ -9,7 +10,9 @@ import com.example.model.response.MealsResponse
  * Model에 대한 참조 보유
  */
 class MealsCategoriesViewModel(private val repository: MealsRepository = MealsRepository()) : ViewModel() {
-    fun getMeals(): List<MealsResponse> {
-        return repository.getMeals().categories
+    fun getMeals(successCallback: (response: MealsCategoriesResponse?) -> Unit){
+        repository.getMeals {response ->
+            successCallback(response)
+        }
     }
 }
