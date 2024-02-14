@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName
  * Json to data Class
  */
 data class MealsCategoriesResponse(
-    val categories: List<MealsResponse> // key와 변수명이 같으면 매핑 생략 가능
+    val categories: List<MealResponse> // key와 변수명이 같으면 매핑 생략 가능
 )
 
-data class MealsResponse(
+data class MealResponse(
     @SerializedName("idCategory") val id: String,
     @SerializedName("strCategory") val name: String,
-    @SerializedName("strCategoryThumb") val description: String,
-    @SerializedName("strCategoryDescription") val imageUrl: String
+    @SerializedName("strCategoryThumb") val imageUrl: String,
+    @SerializedName("strCategoryDescription") val description: String
 )
